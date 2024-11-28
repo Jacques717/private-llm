@@ -1,6 +1,6 @@
-# README.md
+# Personal Local LLM
 
-## Setup Instructions to Set Up and Access LLaMA-2 Model
+## Setup Instructions to Set Up and Access LLaMA-2 Model and run your own personal AI locally
 
 ### Step 1: Install Dependencies
 Install PyTorch with CUDA support:
@@ -71,3 +71,63 @@ inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
 outputs = model.generate(**inputs, max_length=50)
 print(tokenizer.decode(outputs[0], skip_special_tokens=True))
 ```
+
+### Step 2: Verify Successful Execution
+Run the code:
+```bash
+python main.py
+```
+
+* Output: The script should generate a response like:
+```c
+The capital of France is Paris.
+```
+
+
+# Offline Usage
+
+### Step 1: Cache Model Locally
+Hugging Face caches model files by default. Common cache locations:
+* Linux/macOS: ```bash ~/.cache/huggingface/hub/```
+* Windows: ```bashC:\Users\<YourUsername>\.cache\huggingface\hub\```
+
+### Step 2: Modify Script for Offline Use
+Specify the local model path and disable online access:
+```python
+from transformers import AutoTokenizer, AutoModelForCausalLM
+
+model_path = "/models/llama-2"
+tokenizer = AutoTokenizer.from_pretrained(model_path, local_files_only=True)
+model = AutoModelForCausalLM.from_pretrained(model_path, local_files_only=True)
+
+prompt = "What is the capital of France?"
+inputs = tokenizer(prompt, return_tensors="pt").to("cuda")
+outputs = model.generate(**inputs, max_length=50)
+print(tokenizer.decode(outputs[0], skip_special_tokens=True))
+```
+
+### Step 3: Pre-Download Dependencies
+1. Save all dependencies to a requirements.txt file:
+```bash
+pip freeze > requirements.txt
+```
+2. Recreate the environment offline:
+```bash
+pip install -r requirements.txt --no-index --find-links /path/to/local/package-repo
+```
+
+### Step 4: Test Offline Functionality
+Disconnect from the internet and ensure the model runs successfully.
+
+
+# Advanced: Fine-Tuning and Customization
+1. Prepare proprietary data.
+2. Fine-tune the model locally with Hugging Face Transformers or PEFT (Low-Rank Adaptation).
+3. Deploy the fine-tuned model on private infrastructure.
+
+# Other Models
+* LLaMA 2 (Meta): Chat-optimized models, great for both small and large setups.
+* Falcon (Technology Innovation Institute): Lightweight and fast inference.
+* Mistral 7B: Recent model optimized for efficiency and accuracy.
+* GPT-J/GPT-NeoX: General-purpose models from EleutherAI.
+
