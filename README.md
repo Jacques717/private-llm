@@ -43,7 +43,6 @@ pip install transformers accelerate bitsandbytes
 Approval is usually instant or takes a few minutes.
 
 
-
 ### Step 2: Authenticate with Hugging Face
 1. Generate an access token on your Hugging Face Access Tokens page.
 2. Log in via CLI:
@@ -142,3 +141,11 @@ For maximum privacy, consider deploying the model on hardware that is completely
 * Mistral 7B: Recent model optimized for efficiency and accuracy.
 * GPT-J/GPT-NeoX: General-purpose models from EleutherAI.
 
+
+
+# Coming Up
+
+Stay tuned for the next steps, where we'll explore:
+
+- **Adding Your Own Data**: Learn how to fine-tune the model or integrate custom datasets.
+- **Accessing External APIs**: Enable the model to fetch live data from external sources for dynamic and real-time responses.
