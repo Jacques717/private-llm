@@ -153,3 +153,12 @@ Stay tuned for the next commits, where we'll explore:
 - **Integrating APIs and Live Data**: Connect your model to real-time data sources for dynamic responses.
 - **Authentication and Security**: Implement secure access to your API using OAuth or API keys.
 - **Monitoring and Observability**: Track performance and identify issues with Google Cloud Monitoring
+
+
+
+## Tech Stack
+
+- **Machine Learning Framework**: PyTorch, Hugging Face Transformers
+- **Model**: LLaMA-2 (Meta's Language Model)
+- **Libraries**:
+  - Python: `transformers`, `torch`, `accelerate`, `bitsandbytes`
