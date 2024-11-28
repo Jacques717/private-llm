@@ -145,7 +145,11 @@ For maximum privacy, consider deploying the model on hardware that is completely
 
 # Coming Up
 
-Stay tuned for the next steps, where we'll explore:
+Stay tuned for the next commits, where we'll explore:
 
 - **Adding Your Own Data**: Learn how to fine-tune the model or integrate custom datasets.
-- **Accessing External APIs**: Enable the model to fetch live data from external sources for dynamic and real-time responses.
+- **Custom Model Fine-Tuning**: Train the deployed model on proprietary datasets for domain-specific use cases.
+- **Scaling and Performance Optimization**: Techniques to handle high traffic efficiently with autoscaling and caching.
+- **Integrating APIs and Live Data**: Connect your model to real-time data sources for dynamic responses.
+- **Authentication and Security**: Implement secure access to your API using OAuth or API keys.
+- **Monitoring and Observability**: Track performance and identify issues with Google Cloud Monitoring
