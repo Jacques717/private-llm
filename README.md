@@ -1,4 +1,4 @@
-# Personal Local LLM
+# Private Offline Local LLM
 
 ## Setup Instructions to Set Up and Access LLaMA-2 Model and run your own personal AI locally
 
@@ -118,6 +118,17 @@ pip install -r requirements.txt --no-index --find-links /path/to/local/package-r
 
 ### Step 4: Test Offline Functionality
 Disconnect from the internet and ensure the model runs successfully.
+
+
+### Step 5: Optional: Run on Air-Gapped Hardware
+For maximum privacy, consider deploying the model on hardware that is completely disconnected from any external network:
+* On-premise servers or dedicated GPUs.
+* Use isolated virtual machines with no internet connectivity.
+
+### Step 6: Verify No External Requests
+1. Before running your offline setup:
+2. Disconnect from the internet or monitor traffic with tools like Wireshark or tcpdump to ensure no external requests are made.
+3. Run the script and verify it loads all resources locally without errors.
 
 
 # Advanced: Fine-Tuning and Customization
