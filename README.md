@@ -37,7 +37,7 @@ pip install transformers accelerate bitsandbytes
 3. Click "Access repository" to request access.
 4. Agree to Meta's licensing terms.
 
-## Blockquotes
+## Meta License summary
 >The LLAMA 2 Community License allows users to use, modify, and distribute Llama 2 and its derivatives under certain conditions, such as including attribution and adhering to Meta's Acceptable Use Policy, which prohibits illegal, harmful, or deceptive use cases. Commercial use is restricted for entities with over 700 million monthly active users unless a separate license is granted by Meta. The agreement disclaims warranties, limits Meta’s liability, and includes terms regarding intellectual property rights and compliance with laws, with disputes governed by California law.
 
 Approval is usually instant or takes a few minutes.
