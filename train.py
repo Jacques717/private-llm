@@ -1,18 +1,32 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments, Trainer, DataCollatorForLanguageModeling
+from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments, Trainer, DataCollatorForLanguageModeling, BitsAndBytesConfig
 from datasets import Dataset
+
+
+# Configure 8-bit quantization
+quantization_config = BitsAndBytesConfig(
+    load_in_8bit=True,  # Enable 8-bit precision
+    llm_int8_enable_fp32_cpu_offload=True  # Allow offloading 32-bit parts to the CPU
+)
 
 # Load the model and tokenizer
 model_name = "meta-llama/Llama-2-7b-chat-hf"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto",quantization_config=quantization_config)  # Allow offloading 32-bit parts to the CPU
 
 # Load your custom dataset
 data = [{"prompt": "What is my house address?", "response": "123 Main Street, Springfield."}]
 dataset = Dataset.from_list(data)
 
-# Tokenize the dataset
+
+# Tokenize the dataset with a maximum length
 def tokenize_function(example):
-    return tokenizer(f"{example['prompt']} {example['response']}", truncation=True)
+    return tokenizer(
+        f"{example['prompt']} {example['response']}",
+        truncation=True,
+        max_length=512,  # Set a suitable maximum length
+        padding="max_length",  # Ensure all sequences have the same length
+    )
+
 
 tokenized_dataset = dataset.map(tokenize_function, batched=True)
 
@@ -43,3 +57,9 @@ trainer = Trainer(
 trainer.train()
 model.save_pretrained("./fine_tuned_llama")
 tokenizer.save_pretrained("./fine_tuned_llama")
+
+
+
+# # Tokenize the dataset
+# def tokenize_function(example):
+#     return tokenizer(f"{example['prompt']} {example['response']}", truncation=True)
