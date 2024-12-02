@@ -1,9 +1,9 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
-# Load the model and tokenizer
-model_name = "meta-llama/Llama-2-7b-chat-hf"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto", torch_dtype="auto")
+# Load the model and tokenizer from the local directory
+model_dir = "./Llama-3.2-1B"
+tokenizer = AutoTokenizer.from_pretrained(model_dir)
+model = AutoModelForCausalLM.from_pretrained(model_dir, device_map="auto", torch_dtype="auto")
 
 # Generate a response
 prompt = "What is my house address?"

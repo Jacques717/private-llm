@@ -2,11 +2,8 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments,
 from datasets import Dataset
 from peft import LoraConfig, get_peft_model
 
-
-
-
-
-
+# Specify the local directory for the LLaMA model
+model_dir = "./Llama-3.2-1B"
 
 # Configure 8-bit quantization
 quantization_config = BitsAndBytesConfig(
@@ -14,32 +11,20 @@ quantization_config = BitsAndBytesConfig(
     llm_int8_enable_fp32_cpu_offload=True
 )
 
-# Load the model and tokenizer
-#model_name = "meta-llama/Llama-2-7b-chat-hf"
-#model_name = "meta-llama/Llama-2-3b-chat-hf"
-model_name = "meta-llama/Llama-2-7b-chat"
-
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+# Load the tokenizer from the local directory
+tokenizer = AutoTokenizer.from_pretrained(model_dir)
 
 # Add a padding token if not already defined
 if tokenizer.pad_token is None:
     tokenizer.add_special_tokens({'pad_token': tokenizer.eos_token})
 
-# model = AutoModelForCausalLM.from_pretrained(
-#     model_name,
-#     device_map="auto",
-#     quantization_config=quantization_config
-# )
-
-
+# Load the model with FP16 precision and quantization config
 model = AutoModelForCausalLM.from_pretrained(
-    model_name,
+    model_dir,
     device_map="auto",
-    torch_dtype="float16"  # Use FP16 precision for better training compatibility
+    torch_dtype="float16",  # Use FP16 precision
+    quantization_config=quantization_config
 )
-
-
-
 
 # Configure LoRA for PEFT
 lora_config = LoraConfig(
